@@ -1,20 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>EMS SOP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flakes SOPs</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 16px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    .card {
+      background: white;
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .content {
+      display: none;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>EMS SOP</h1>
+<header>Flakes SOPs</header>
 
-  <h2>Protocols</h2>
+<div class="container">
 
-  <ul>
-    <li>Cardiac</li>
-    <li>Trauma</li>
-    <li>Respiratory</li>
-    <li>Medications</li>
-  </ul>
+  <input type="text" id="search" placeholder="Search SOPs..." onkeyup="searchSOPs()">
+
+  <div class="card">
+    <h2 onclick="toggle(this)">Cardiac</h2>
+    <div class="content">
+      - CPR protocol<br>
+      - STEMI care<br>
+      - Bradycardia / Tachycardia
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 onclick="toggle(this)">Trauma</h2>
+    <div class="content">
+      - Bleeding control<br>
+      - Shock management<br>
+      - Spinal precautions
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 onclick="toggle(this)">Respiratory</h2>
+    <div class="content">
+      - Asthma<br>
+      - COPD<br>
+      - Airway management
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 onclick="toggle(this)">Medications</h2>
+    <div class="content">
+      - Epinephrine<br>
+      - Nitroglycerin<br>
+      - Albuterol
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggle(el) {
+  const content = el.nextElementSibling;
+  content.style.display = content.style.display === "block" ? "none" : "block";
+}
+
+function searchSOPs() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let cards = document.getElementsByClassName("card");
+
+  for (let i = 0; i < cards.length; i++) {
+    let text = cards[i].innerText.toLowerCase();
+    cards[i].style.display = text.includes(input) ? "block" : "none";
+  }
+}
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
 
 </body>
 </html>
